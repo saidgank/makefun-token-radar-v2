@@ -1,0 +1,419 @@
+{
+ "fetched_at": "2026-11-21T18:45:39.804487+00:00",
+ "model_version": "radar-2.1",
+ "launch_window": [
+  "2023-01-01",
+  "2026-08-31"
+ ],
+ "tvl_floor_usd": 5000000,
+ "sources": {
+  "pre_launch_features": "DefiLlama api.llama.fi/protocol/{slug}: the TVL history up to the day before the token first traded (TVL that day, TVL change over the seven days before, age = days from the first TVL record to the launch), and the category DefiLlama records for the protocol (null where it records none; the model then uses the global multiple)",
+  "launch_and_prices": "DefiLlama coins.llama.fi chart API by CoinGecko id, accepted only when the chart symbol equals the protocol symbol: the first price day is the launch; day-30 price is the price nearest 30 days after it",
+  "outcome_now": "CoinGecko api.coingecko.com/api/v3/coins/{id}: market_cap.usd on the fetch date",
+  "outcome_day30_estimate": "day-30 price x circulating supply on the fetch date, the supply derived as CoinGecko market cap / DefiLlama coins current price; an upper bound on the launch-window market cap, since circulating supply generally grows after a launch",
+  "multiples": "measured on the sealed competition snapshot (DefiLlama protocols as of 2026-11-14) by lib/model.ts deriveMultiples and frozen here, so the blind test runs without the snapshot",
+  "selection": "well-known launches of DefiLlama-tracked protocols, first traded 2023-01-01 to 2026-08-31, pre-launch TVL at least $5,000,000, at least 8 days of pre-launch TVL history; candidates failing any rule were dropped with the reason recorded in the build notes"
+ },
+ "multiples": {
+  "global": 0.168892,
+  "by_category": {
+   "Basis Trading": {
+    "multiple": 0.377782,
+    "n": 8,
+    "median": 0.482227
+   },
+   "Bridge": {
+    "multiple": 0.11523,
+    "n": 8,
+    "median": 0.088399
+   },
+   "CDP": {
+    "multiple": 0.16881,
+    "n": 3,
+    "median": 0.168701
+   },
+   "CEX": {
+    "multiple": 0.090495,
+    "n": 11,
+    "median": 0.061987
+   },
+   "Canonical Bridge": {
+    "multiple": 0.553892,
+    "n": 8,
+    "median": 0.746393
+   },
+   "Cross Chain Bridge": {
+    "multiple": 0.694677,
+    "n": 4,
+    "median": 1.220462
+   },
+   "Dexs": {
+    "multiple": 0.296157,
+    "n": 11,
+    "median": 0.342435
+   },
+   "Indexes": {
+    "multiple": 0.1598,
+    "n": 3,
+    "median": 0.147678
+   },
+   "Lending": {
+    "multiple": 0.140078,
+    "n": 15,
+    "median": 0.132395
+   },
+   "Liquid Staking": {
+    "multiple": 0.070219,
+    "n": 11,
+    "median": 0.034339
+   },
+   "Onchain Capital Allocator": {
+    "multiple": 0.099021,
+    "n": 3,
+    "median": 0.005859
+   },
+   "Privacy": {
+    "multiple": 0.511851,
+    "n": 3,
+    "median": 0.969129
+   },
+   "RWA": {
+    "multiple": 0.242199,
+    "n": 9,
+    "median": 0.27478
+   },
+   "Yield": {
+    "multiple": 0.13196,
+    "n": 13,
+    "median": 0.120596
+   },
+   "Yield Aggregator": {
+    "multiple": 0.103057,
+    "n": 5,
+    "median": 0.050389
+   }
+  }
+ },
+ "launches": [
+  {
+   "slug": "aerodrome",
+   "name": "Aero",
+   "symbol": "AERO",
+   "gecko_id": "aerodrome-finance",
+   "category": null,
+   "launch_date": "2023-09-23",
+   "tvl_pre_usd": 258386171,
+   "change_7d_pre_pct": -8.3327,
+   "age_days_pre": 478,
+   "price_day1_usd": 0.03862355,
+   "price_day30_usd": 0.02002443,
+   "price_now_usd": 0.40081142750000004,
+   "mcap_now_usd": 95018445,
+   "mcap_day30_est_usd": 4747096
+  },
+  {
+   "slug": "ether.fi",
+   "name": "ether.fi",
+   "symbol": "ETHFI",
+   "gecko_id": "ether-fi",
+   "category": null,
+   "launch_date": "2024-03-18",
+   "tvl_pre_usd": 2907922436,
+   "change_7d_pre_pct": 31.1552,
+   "age_days_pre": 382,
+   "price_day1_usd": 3.12,
+   "price_day30_usd": 3.82,
+   "price_now_usd": 0.47059154900000005,
+   "mcap_now_usd": 470984320,
+   "mcap_day30_est_usd": 3823188296
+  },
+  {
+   "slug": "ethena",
+   "name": "Ethena",
+   "symbol": "ENA",
+   "gecko_id": "ethena",
+   "category": null,
+   "launch_date": "2024-04-03",
+   "tvl_pre_usd": 1558559475,
+   "change_7d_pre_pct": 16.047,
+   "age_days_pre": 111,
+   "price_day1_usd": 0.781382,
+   "price_day30_usd": 0.797839,
+   "price_now_usd": 0.098400476225,
+   "mcap_now_usd": 1331958644,
+   "mcap_day30_est_usd": 10799628146
+  },
+  {
+   "slug": "wormhole",
+   "name": "Portal",
+   "symbol": "W",
+   "gecko_id": "wormhole",
+   "category": "Bridge",
+   "launch_date": "2024-04-03",
+   "tvl_pre_usd": 2530403087,
+   "change_7d_pre_pct": 1.3344,
+   "age_days_pre": 933,
+   "price_day1_usd": 1.6545519465552347,
+   "price_day30_usd": 0.720606,
+   "price_now_usd": 0.008075626507500001,
+   "mcap_now_usd": 55191821,
+   "mcap_day30_est_usd": 4924888159
+  },
+  {
+   "slug": "parcl",
+   "name": "Parcl",
+   "symbol": "PRCL",
+   "gecko_id": "parcl",
+   "category": null,
+   "launch_date": "2024-04-17",
+   "tvl_pre_usd": 125040549,
+   "change_7d_pre_pct": -27.026,
+   "age_days_pre": 427,
+   "price_day1_usd": 0.561024,
+   "price_day30_usd": 0.3451725124466558,
+   "price_now_usd": 0.004628287507321067,
+   "mcap_now_usd": 4224310,
+   "mcap_day30_est_usd": 315044321
+  },
+  {
+   "slug": "kamino",
+   "name": "Kamino",
+   "symbol": "KMNO",
+   "gecko_id": "kamino",
+   "category": null,
+   "launch_date": "2024-05-01",
+   "tvl_pre_usd": 1083951765,
+   "change_7d_pre_pct": -7.6378,
+   "age_days_pre": 604,
+   "price_day1_usd": 0.04110935,
+   "price_day30_usd": 0.055989,
+   "price_now_usd": 0.023384826125,
+   "mcap_now_usd": 141142148,
+   "mcap_day30_est_usd": 337928864
+  },
+  {
+   "slug": "renzo",
+   "name": "Renzo",
+   "symbol": "REZ",
+   "gecko_id": "renzo",
+   "category": "Liquid Restaking",
+   "launch_date": "2024-05-01",
+   "tvl_pre_usd": 3306710558,
+   "change_7d_pre_pct": -1.9885,
+   "age_days_pre": 134,
+   "price_day1_usd": 0.159921,
+   "price_day30_usd": 0.1367312891852907,
+   "price_now_usd": 0.0023499628900000005,
+   "mcap_now_usd": 21865618,
+   "mcap_day30_est_usd": 1272238873
+  },
+  {
+   "slug": "sanctum",
+   "name": "Sanctum",
+   "symbol": "SANC",
+   "gecko_id": "sanctum-2",
+   "category": null,
+   "launch_date": "2024-07-20",
+   "tvl_pre_usd": 878949007,
+   "change_7d_pre_pct": 9.6062,
+   "age_days_pre": 340,
+   "price_day1_usd": 0.32664578081333556,
+   "price_day30_usd": 0.181662,
+   "price_now_usd": 0.05249980815,
+   "mcap_now_usd": 25650568,
+   "mcap_day30_est_usd": 88757153
+  },
+  {
+   "slug": "orderly",
+   "name": "Orderly",
+   "symbol": "ORDER",
+   "gecko_id": "orderly-network",
+   "category": null,
+   "launch_date": "2024-08-26",
+   "tvl_pre_usd": 19385297,
+   "change_7d_pre_pct": -9.3377,
+   "age_days_pre": 655,
+   "price_day1_usd": 0.207169,
+   "price_day30_usd": 0.169308,
+   "price_now_usd": 0.027093454900000005,
+   "mcap_now_usd": 11688399,
+   "mcap_day30_est_usd": 73041237
+  },
+  {
+   "slug": "eigenlayer",
+   "name": "EigenCloud",
+   "symbol": "EIGEN",
+   "gecko_id": "eigenlayer",
+   "category": "Restaking",
+   "launch_date": "2024-10-02",
+   "tvl_pre_usd": 11957589120,
+   "change_7d_pre_pct": -3.4036,
+   "age_days_pre": 476,
+   "price_day1_usd": 3.99,
+   "price_day30_usd": 2.74,
+   "price_now_usd": 0.11649985950000001,
+   "mcap_now_usd": 119098886,
+   "mcap_day30_est_usd": 2801127392
+  },
+  {
+   "slug": "meth-protocol",
+   "name": "mETH Protocol",
+   "symbol": "COOK",
+   "gecko_id": "meth-protocol",
+   "category": "Liquid Staking",
+   "launch_date": "2024-10-30",
+   "tvl_pre_usd": 1233972960,
+   "change_7d_pre_pct": -2.6279,
+   "age_days_pre": 331,
+   "price_day1_usd": 0.0222154,
+   "price_day30_usd": 0.02443996,
+   "price_now_usd": 0.0018863802209602926,
+   "mcap_now_usd": 1811947,
+   "mcap_day30_est_usd": 23475602
+  },
+  {
+   "slug": "usual",
+   "name": "Usual",
+   "symbol": "USUAL",
+   "gecko_id": "usual",
+   "category": null,
+   "launch_date": "2024-11-19",
+   "tvl_pre_usd": 368018548,
+   "change_7d_pre_pct": 5.0736,
+   "age_days_pre": 127,
+   "price_day1_usd": 1.084,
+   "price_day30_usd": 1.026,
+   "price_now_usd": 0.0114907594925,
+   "mcap_now_usd": 22985587,
+   "mcap_day30_est_usd": 2052363230
+  },
+  {
+   "slug": "hyperliquid",
+   "name": "Hyperliquid",
+   "symbol": "HYPE",
+   "gecko_id": "hyperliquid",
+   "category": null,
+   "launch_date": "2024-11-29",
+   "tvl_pre_usd": 1049908540,
+   "change_7d_pre_pct": 1.5781,
+   "age_days_pre": 539,
+   "price_day1_usd": 6.51,
+   "price_day30_usd": 27.53,
+   "price_now_usd": 60.9281659175,
+   "mcap_now_usd": 14478044789,
+   "mcap_day30_est_usd": 6541811444
+  },
+  {
+   "slug": "babylon-protocol",
+   "name": "Babylon Protocol",
+   "symbol": "BABY",
+   "gecko_id": "babylon",
+   "category": "Restaking",
+   "launch_date": "2025-04-11",
+   "tvl_pre_usd": 4112206815,
+   "change_7d_pre_pct": -4.4431,
+   "age_days_pre": 171,
+   "price_day1_usd": 0.111905,
+   "price_day30_usd": 0.098785,
+   "price_now_usd": 0.007517086050000001,
+   "mcap_now_usd": 39269574,
+   "mcap_day30_est_usd": 516056999
+  },
+  {
+   "slug": "dolomite",
+   "name": "Dolomite",
+   "symbol": "DOLO",
+   "gecko_id": "dolomite",
+   "category": "Lending",
+   "launch_date": "2025-04-25",
+   "tvl_pre_usd": 694386677,
+   "change_7d_pre_pct": 16.5103,
+   "age_days_pre": 921,
+   "price_day1_usd": 0.065766,
+   "price_day30_usd": 0.03749657,
+   "price_now_usd": 0.017874292925,
+   "mcap_now_usd": 9289096,
+   "mcap_day30_est_usd": 19486602
+  },
+  {
+   "slug": "spark",
+   "name": "Spark",
+   "symbol": "SPK",
+   "gecko_id": "spark-2",
+   "category": null,
+   "launch_date": "2025-06-17",
+   "tvl_pre_usd": 6089498929,
+   "change_7d_pre_pct": -0.3065,
+   "age_days_pre": 778,
+   "price_day1_usd": 0.057100026891310406,
+   "price_day30_usd": 0.03408391,
+   "price_now_usd": 0.012114960510000002,
+   "mcap_now_usd": 42322961,
+   "mcap_day30_est_usd": 119070301
+  },
+  {
+   "slug": "usd-ai",
+   "name": "USD AI",
+   "symbol": "CHIP",
+   "gecko_id": "chip-2",
+   "category": "RWA",
+   "launch_date": "2026-04-22",
+   "tvl_pre_usd": 284021568,
+   "change_7d_pre_pct": -5.6743,
+   "age_days_pre": 338,
+   "price_day1_usd": 0.06082462512965594,
+   "price_day30_usd": 0.047900542004213516,
+   "price_now_usd": 0.026358351710000002,
+   "mcap_now_usd": 52752742,
+   "mcap_day30_est_usd": 95866576
+  },
+  {
+   "slug": "solstice",
+   "name": "Solstice",
+   "symbol": "SLX",
+   "gecko_id": "solstice",
+   "category": "Basis Trading",
+   "launch_date": "2026-05-25",
+   "tvl_pre_usd": 401170949,
+   "change_7d_pre_pct": 5.9586,
+   "age_days_pre": 237,
+   "price_day1_usd": 0.20686297443600427,
+   "price_day30_usd": 0.32314945155129826,
+   "price_now_usd": 0.02987867005,
+   "mcap_now_usd": 7255690,
+   "mcap_day30_est_usd": 78473113
+  },
+  {
+   "slug": "cap",
+   "name": "cap",
+   "symbol": "CAP",
+   "gecko_id": "cap-4",
+   "category": "Lending",
+   "launch_date": "2026-06-27",
+   "tvl_pre_usd": 221385755,
+   "change_7d_pre_pct": -10.4321,
+   "age_days_pre": 317,
+   "price_day1_usd": 0.029368652489670462,
+   "price_day30_usd": 0.02245243545394538,
+   "price_now_usd": 0.086994,
+   "mcap_now_usd": 134975273,
+   "mcap_day30_est_usd": 34836007
+  },
+  {
+   "slug": "grove-finance",
+   "name": "Grove Finance",
+   "symbol": "GROVE",
+   "gecko_id": "grove-2",
+   "category": "Onchain Capital Allocator",
+   "launch_date": "2026-07-06",
+   "tvl_pre_usd": 2586808499,
+   "change_7d_pre_pct": -1.4707,
+   "age_days_pre": 164,
+   "price_day1_usd": 0.03177608458011875,
+   "price_day30_usd": 0.00938375775829272,
+   "price_now_usd": 0.00520852728,
+   "mcap_now_usd": 5020837,
+   "mcap_day30_est_usd": 9045612
+  }
+ ]
+}

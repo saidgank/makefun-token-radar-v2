@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DUSTLINE Token Radar v2 — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-in">
+    <div>
+      <h1>DUSTLINE <span>TOKEN RADAR</span> <em>v2</em></h1>
+      <p class="tagline">Pre-token protocols ranked by implied value — what each token would be worth if the protocol's record stayed as it is, and the dated plan to farm it.</p>
+    </div>
+    <div class="mast-stats" id="mastStats"></div>
+  </div>
+</header>
+
+<main id="boardView">
+  <section class="panel model-panel">
+    <div class="model-grid">
+      <div>
+        <h2>The value model <span class="dim" id="modelVersion"></span></h2>
+        <p class="formula">implied value = TVL &times; category multiple &times; growth factor &times; maturity factor</p>
+        <p>The category multiple is <strong>measured on this snapshot</strong>: the median market-cap / TVL of the snapshot's own tokenised protocols in the category, shrunk toward the global median by sample size. A category needs at least three tokenised peers to earn a multiple of its own — below that, one anecdote would rule (the snapshot's lone prediction-market token trades near 400&times; its protocol's TVL), so the global median stands in. The growth factor answers the 7-day TVL change (clamped &minus;50% to +150%, weight 0.5). The maturity factor answers how long the protocol has run with no token (0.55 at birth, nearing 1.00 after about four years). No name is special-cased: one function scores every row of the board and every launch in the blind test beside it.</p>
+        <div id="multipleTable"></div>
+      </div>
+      <div>
+        <h2>The blind test <span class="dim">model vs history</span></h2>
+        <div id="blindStats"></div>
+        <p class="dim small">Each past launch is scored with only what was knowable the day before its token first traded: TVL that day, the 7-day TVL change into it, and the protocol's age, all from DefiLlama's public history. The headline outcome is the token's market cap on the fetch date (CoinGecko, 21 Nov 2026) — the one outcome that is fully observed. The day-30 column estimates the launch-window market cap (day-30 price &times; today's circulating supply): an upper bound, since supply generally grows after a launch; against it the same scores read <span id="blindDay30"></span>. Two honest caveats: the multiples are calibrated on protocols still trading at the snapshot, a survivor set; and most of these tokens launched into the 2024–26 airdrop seasons and bled afterwards, which the median ratio shows. Recompute everything from the committed dataset: <code>node tools/backtest.mjs</code>.</p>
+        <div id="blindTable"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search name or slug">
+      <select id="catFilter"><option value="">All categories</option></select>
+      <select id="chainFilter"><option value="">All chains</option></select>
+      <select id="tvlFilter">
+        <option value="0">Any TVL</option>
+        <option value="50000000">TVL &ge; $50M (watchlist floor)</option>
+        <option value="100000000">TVL &ge; $100M</option>
+        <option value="500000000">TVL &ge; $500M</option>
+        <option value="1000000000">TVL &ge; $1B</option>
+      </select>
+      <label class="check"><input id="watchOnly" type="checkbox"> Watchlist only</label>
+      <span class="dim" id="rowCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="board">
+        <thead><tr>
+          <th data-key="rank">#</th><th data-key="name">Protocol</th><th data-key="category">Category</th>
+          <th data-key="chains">Chains</th><th data-key="tvl_usd" class="num">TVL</th><th data-key="change_7d" class="num">7d</th>
+          <th data-key="age_days" class="num">Age</th><th data-key="implied_value_usd" class="num">Implied value</th>
+          <th data-key="capital" class="num">Plan capital</th><th data-key="stop_usd" class="num">TVL stop</th>
+        </tr></thead>
+        <tbody id="boardBody"></tbody>
+      </table>
+    </div>
+    <p class="dim small">Click a column heading to sort; click a row for the protocol's detail view: the model's arithmetic and its dated farm plan. WL marks a snapshot watchlist protocol. Every watchlist protocol is on this board.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Already trading — tracked, not ranked</h2>
+    <p class="dim">These protocols' tokens exist, so the radar does not rank them: it shows the market's own value. Their market-cap / TVL ratios are also the calibration the model measures its category multiples from.</p>
+    <div class="table-wrap">
+      <table id="tracked">
+        <thead><tr><th>Protocol</th><th>Symbol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">MCap / TVL</th><th class="num">7d</th></tr></thead>
+        <tbody id="trackedBody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<main id="detailView" hidden>
+  <section class="panel" id="detailPanel"></section>
+</main>
+
+<footer>
+  <p>Snapshot: <span id="footSource"></span>. Farm-plan gas figures are estimates for a simple transaction on the named chain at typical fees; capital is the farmer's own position. An implied value is this entry's own claim about what a token would be worth if the protocol's record stayed as it is — not a prediction that a token will be issued, and not advice.</p>
+  <p class="dim">DUSTLINE Token Radar v2 · built by an AI agent for make.fun's token launch radar bounty.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
